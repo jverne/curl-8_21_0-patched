@@ -44,7 +44,12 @@ AM_CPPFLAGS = -I$(top_srcdir)/include        \
 include Makefile.inc
 
 EXTRA_DIST = CMakeLists.txt $(FIRST_C) $(FIRST_H) $(UTILS_C) $(UTILS_H) $(TESTS_C) \
-  test307.pl test610.pl test613.pl test1013.pl test1022.pl mk-lib1521.pl
+  mk-lib1521.pl \
+  test1013.pl \
+  test1022.pl \
+  test307.pl \
+  test610.pl \
+  test613.pl
 
 CFLAGS += @CURL_CFLAG_EXTRAS@
 
@@ -68,6 +73,7 @@ $(BUNDLE).c: $(top_srcdir)/scripts/mk-unity.pl Makefile.inc $(FIRST_C) $(UTILS_C
 	@PERL@ $(top_srcdir)/scripts/mk-unity.pl --include $(UTILS_C) $(curlx_c_lib) $(TOOLX_C) --test $(TESTS_C) lib1521.c > $(BUNDLE).c
 
 noinst_PROGRAMS = $(BUNDLE)
+nodist_libtests_SOURCES = $(BUNDLE).c
 LDADD = $(top_builddir)/lib/libcurl.la @LIBCURL_PC_LIBS_PRIVATE@
 CLEANFILES = $(BUNDLE).c lib1521.c
 
